@@ -25,6 +25,13 @@ model User {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
   posts     Post[]
+  blogs     Blog[]
 
   @@map(name: "users")
+}
+
+model Blog {
+  id    String @id @default(cuid())
+  title String
+  user  User   @relation(fields: [id], references: [id])
 }

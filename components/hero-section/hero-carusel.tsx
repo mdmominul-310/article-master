@@ -11,6 +11,8 @@ import {
     type CarouselApi,
 } from "@/components/ui/carousel"
 import Image from "next/image"
+import './hero-carusel.css'
+import { PersonIcon, TimerIcon } from "@radix-ui/react-icons"
 
 export function HeroCarusel() {
     const [api, setApi] = React.useState<CarouselApi>()
@@ -31,16 +33,39 @@ export function HeroCarusel() {
     }, [api])
 
     return (
-        <div>
+        <div className="py-4">
             <Carousel setApi={setApi} className="w-full ">
                 <CarouselContent>
                     {Array.from({ length: 5 }).map((_, index) => (
                         <CarouselItem key={index}>
-                            <Card>
-                                <CardContent className="flex  items-center justify-center">
-                                    <Image src='https://preview.mysterythemes.com/articlewave/wp-content/uploads/sites/9/2023/07/image1.jpg' width={615} height={461} alt="preview image" className="scale-150" />
-                                </CardContent>
-                            </Card>
+                            <article
+                                className="relative"
+                            >
+                                <div>
+                                    <Image
+                                        src="https://preview.mysterythemes.com/articlewave/wp-content/uploads/sites/9/2023/07/image1.jpg"
+                                        alt="hero-carusel-1"
+                                        width={650}
+                                        height={420}
+                                        layout="responsive"
+                                        className="object-cover object-center rounded-lg"
+                                    />
+                                </div>
+                                <div className="bottom-0 absolute p-6 carusel-bottom-gradiant inline-block w-full" >
+                                    <p className="bg-red-500 font-bold text-white inline-block px-4 rounded">Categories</p>
+                                    <h3 className="text-3xl font-bold text-white py-2 ">This is categories</h3>
+                                    <div className="flex gap-4 text-white py-3">
+                                        <h5 className="flex justify-center items-center"><TimerIcon />16 July 2000</h5>
+                                        <h5 className="flex justify-center items-center"><PersonIcon /> Admin</h5>
+                                    </div>
+                                    <div className="flex justify-between py-4 text-white">
+                                        <p className="">Read More</p>
+                                        <h6>2 mins Read</h6>
+                                    </div>
+                                </div>
+                                {/* <h1 className="bg-red-500">This is categories</h1> */}
+                            </article>
+
                         </CarouselItem>
                     ))}
                 </CarouselContent>
