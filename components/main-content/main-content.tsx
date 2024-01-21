@@ -3,8 +3,6 @@ import { ContentCard } from "./sidebar/content-card"
 import prisma from "@/lib/prisma"
 
 export const MainContent = async () => {
-    const data = await prisma.blog.findMany()
-    console.log(data)
     return (
         <div className="w-full container">
             <div className="grid grid-cols-12 ">
