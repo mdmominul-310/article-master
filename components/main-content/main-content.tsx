@@ -1,6 +1,5 @@
 import { ArticleCard } from "./article-card"
 import { ContentCard } from "./sidebar/content-card"
-import prisma from "@/lib/prisma"
 
 export const MainContent = async () => {
     return (
