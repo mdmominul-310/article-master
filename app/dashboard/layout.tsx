@@ -32,53 +32,37 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
             title: "Blog",
             path: "/dashboard/blogs",
             icon: PaperPlaneIcon
-        }
+        },
+
     ]
 
 
-    console.log()
+
 
     return (
+
         <div>
-            <div className="flex" >
-                <div className={
-                    cn(
-                        "w-[240px] bg-white dark:bg-gray-800 block",
-                        { "hidden": !sidebarOpen },
-                    )
-                }
-
-                >
-                    <div className="w-[240px]">
-                        <div className="py-3 text-center dark:bg-gray-950  w-[240px]">
-                            <h2 className="">Article Master</h2>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div className="bg-green-900 sticky top-0">
                 <DashboardHeader
                     setSidebarOpen={setSidebarOpen}
+                    sidebarOpen={sidebarOpen}
                 />
             </div>
+            <div className="relative">
+                <div className="flex h-screen w-screen fixed ">
+                    <div className={
+                        cn(
+                            " bg-white overflow-auto flex  overflow-x-hidden min-w-[240px]",
+                            { "w-[80px] min-w-[80px]": !sidebarOpen }
+                        )
+                    }>
 
-
-            <div className="flex w-full relative gap-4 ">
-                <div className={
-                    cn(
-                        "w-[240px] max-w-[240px] bg-white dark:bg-gray-800  h-screen relative top-0 left-0 z-10 transition-all duration-300 ease-in-out",
-                        { "w-[60px]": !sidebarOpen },
-                    )
-
-                }>
-                    <Separator />
-                    <div className="">
-                        <ul className="flex flex-col ">
+                        <ul className="flex flex-col w-full ">
                             {
                                 navData?.map((nav, idx) => (
                                     <li key={idx} className={cn(
-                                        "p-4 hover:bg-gray-100 dark:hover:bg-slate-900 cursor-pointer flex items-center gap-4 text-sm",
-                                        { "bg-gray-100": nav.path === location },
+                                        "p-4 hover:bg-gray-300 dark:hover:bg-slate-900 cursor-pointer flex items-center gap-4 text-sm",
+                                        { "bg-gray-300": nav.path === location },
                                         { "dark:bg-slate-900": nav.path === location }
                                     )}
                                         onClick={() => router.push(nav?.path as string)}
@@ -91,14 +75,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                                 ))
                             }
                         </ul>
+
                     </div>
+                    <div className="w-full">{children}</div>
                 </div>
-                <div className="w-full">
-                    {children}
-                </div>
-
             </div>
-
         </div>
     )
 }
