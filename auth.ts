@@ -1,38 +1,15 @@
-import NextAuth from "next-auth";
-import type { NextAuthConfig, User } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import GitHub from "next-auth/providers/github";
-
-declare module "next-auth" {
-    interface Session {
-        user: {
-            picture?: string;
-        } & Omit<User, "id">;
-    }
-}
-
-export const authConfig = {
-    debug: true,
-    providers: [
-        GitHub,
-        Credentials({
-            credentials: { password: { label: "Password", type: "password" } },
-            authorize(c) {
-                if (c?.password !== "1") return null;
-                return {
-                    name: "Fill Murray",
-                    email: "bill@fillmurray.com",
-                    image: "https://www.fillmurray.com/64/64",
-                    id: "1",
-                };
-            },
-        }),
-    ],
-    callbacks: {
-        authorized(params: { auth: { user: User } }) {
-            return !!params.auth?.user;
-        },
+import NextAuth from "next-auth"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import db from "@/lib/db"
+export const { handlers: { GET, POST }, auth, signIn, signOut, unstable_update } = NextAuth({
+    pages: {
+        signIn: "/auth/signin",
+        error: "/auth/error",
     },
-} satisfies typeof NextAuthConfig;
+    providers: [],
+    session: {
+        strategy: "jwt",
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+    },
+    adapter: PrismaAdapter(db as any),
+})
