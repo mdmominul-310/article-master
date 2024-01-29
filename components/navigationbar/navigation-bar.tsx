@@ -61,7 +61,7 @@ export function NavigationBar() {
 
   return (
 
-    <div className="bg-white sticky top-0 z-50">
+    <div className="bg-white sticky top-0 z-50 dark:bg-black">
       <div className="container mx-auto flex justify-between ">
         <NavigationMenu>
           <NavigationMenuList>

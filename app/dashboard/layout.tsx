@@ -1,7 +1,6 @@
 'use client'
 import { useRouter, usePathname } from "next/navigation"
 import { DashboardHeader } from "@/components/dashboard-components/dashboard-header/dashboard-header"
-import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { DashboardIcon, PaperPlaneIcon, PersonIcon } from "@radix-ui/react-icons"
@@ -12,9 +11,9 @@ type INavData = {
     path: String,
     icon: any
 }
+
 const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
     const [sidebarOpen, setSidebarOpen] = useState(true)
-
     const location: string = usePathname();
     const router = useRouter();
     const navData: INavData[] = [
@@ -52,7 +51,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                 <div className="flex h-screen w-screen fixed ">
                     <div className={
                         cn(
-                            " bg-white overflow-auto flex  overflow-x-hidden min-w-[240px]",
+                            " bg-white overflow-auto flex  overflow-x-hidden min-w-[240px] duration-300",
                             { "w-[80px] min-w-[80px]": !sidebarOpen }
                         )
                     }>
@@ -61,7 +60,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                             {
                                 navData?.map((nav, idx) => (
                                     <li key={idx} className={cn(
-                                        "p-4 hover:bg-gray-300 dark:hover:bg-slate-900 cursor-pointer flex items-center gap-4 text-sm",
+                                        "p-4 hover:bg-gray-300 dark:hover:bg-slate-900 cursor-pointer flex items-center gap-4 text-sm font-semibold",
                                         { "bg-gray-300": nav.path === location },
                                         { "dark:bg-slate-900": nav.path === location }
                                     )}
@@ -77,7 +76,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                         </ul>
 
                     </div>
-                    <div className="w-full">{children}</div>
+                    <div className="w-full overflow-auto">{children}</div>
                 </div>
             </div>
         </div>
