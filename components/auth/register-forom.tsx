@@ -18,12 +18,14 @@ import { Input } from "@/components/ui/input"
 import AuthSchema from "@/schemas/auth-schemas"
 import { useState, useTransition } from "react"
 import { register } from "@/actions/auth-actions"
+import toast, { Toaster } from "react-hot-toast"
+import { useRouter } from "next/navigation"
+
 
 
 
 export function RegisterForm() {
     const [isPending, startTransition] = useTransition();
-    const [success, setSuccess] = useState<String | undefined>("")
     const form = useForm<z.infer<typeof AuthSchema.registerSchmea>>({
         resolver: zodResolver(AuthSchema.registerSchmea),
         defaultValues: {
@@ -33,14 +35,21 @@ export function RegisterForm() {
             name: "",
         },
     })
-
+    const router = useRouter()
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof AuthSchema.registerSchmea>) {
         startTransition(() => {
             register(values).then((res) => {
-                console.log(res)
+                if (res.status === 200) {
+                    toast.success(res.message)
+                    router.push('/auth/login')
+                }
+                else {
+                    toast.error(res.message)
+                }
             })
         })
+
 
     }
 
@@ -49,26 +58,10 @@ export function RegisterForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                     control={form.control}
-                    name="username"
-                    render={({ field }: { field: any }) => (
-                        <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Your user name" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
                     name="name"
                     render={({ field }: { field: any }) => (
                         <FormItem>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Full Name</FormLabel>
                             <FormControl>
                                 <Input placeholder="Your Display Name" {...field} />
                             </FormControl>
@@ -84,7 +77,7 @@ export function RegisterForm() {
                     name="email"
                     render={({ field }: { field: any }) => (
                         <FormItem>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Email Address</FormLabel>
                             <FormControl>
                                 <Input placeholder="your email address" {...field} />
                             </FormControl>
@@ -102,7 +95,7 @@ export function RegisterForm() {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input placeholder="Your password" {...field} />
+                                <Input placeholder="Your password" {...field} type="password" />
                             </FormControl>
                             <FormDescription>
                                 your password.
@@ -111,8 +104,9 @@ export function RegisterForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type="submit" isLoading={isPending}>Submit</Button>
             </form>
+            <Toaster />
         </Form>
     )
 }

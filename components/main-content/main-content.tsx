@@ -5,7 +5,7 @@ export const MainContent = async () => {
     return (
         <div className="w-full container">
             <div className="grid grid-cols-12 ">
-                <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md">
+                <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md dark:bg-slate-950">
                     <div>
                         {
                             Array.from({ length: 5 }, (_, i) => (
@@ -28,8 +28,8 @@ export const MainContent = async () => {
                         }
                     </div>
                 </div>
-                <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md">
-                    <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md">
+                <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md dark:bg-slate-950">
+                    <div className="grid col-span-3 shadow-lg bg-white p-4 rounded-md dark:bg-slate-950">
                         <div>
                             {
                                 Array.from({ length: 5 }, (_, i) => (

@@ -6,7 +6,8 @@ import { Footer } from "./footer/Footer"
 
 export const ConditionLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname()
-    if (!(pathname.startsWith('/dashhboard'))) {
+    console.log(pathname.startsWith('/dashboard'))
+    if ((pathname.startsWith('/dashboard'))) {
         return (
             <div>
                 {children}
