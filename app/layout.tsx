@@ -1,13 +1,11 @@
-
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import { NavigationBar } from '@/components/navigationbar/navigation-bar'
-import { Footer } from '@/components/footer/Footer'
+import { ConditionLayout } from '@/components/condition-layout'
+
 
 const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
   title: 'Article Master',
   description: 'Article master is a blog website',
@@ -18,6 +16,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -27,9 +26,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavigationBar />
-          {children}
-          <Footer />
+          <ConditionLayout>
+            {children}
+          </ConditionLayout>
         </ThemeProvider>
       </body>
     </html>

@@ -39,7 +39,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
 
 
     return (
-
         <div>
             <div className="bg-green-900 sticky top-0">
                 <DashboardHeader
@@ -51,7 +50,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                 <div className="flex h-screen w-screen fixed ">
                     <div className={
                         cn(
-                            " bg-white overflow-auto flex  overflow-x-hidden min-w-[240px] duration-300",
+                            " bg-white dark:bg-slate-800 overflow-auto flex  overflow-x-hidden min-w-[240px] duration-300",
                             { "w-[80px] min-w-[80px]": !sidebarOpen }
                         )
                     }>
@@ -76,7 +75,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }): JSX.Eleme
                         </ul>
 
                     </div>
-                    <div className="w-full overflow-auto">{children}</div>
+                    <div className="w-full overflow-auto dark:bg-slate-700">{children}</div>
                 </div>
             </div>
         </div>

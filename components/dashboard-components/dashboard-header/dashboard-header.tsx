@@ -1,8 +1,10 @@
 import { cn } from "@/lib/utils"
-import { TextAlignJustifyIcon } from "@radix-ui/react-icons"
+import { MoonIcon, SunIcon, TextAlignJustifyIcon } from "@radix-ui/react-icons"
 import { ProfileSettings } from "./profile-settings"
+import { useTheme } from "next-themes";
 
 export const DashboardHeader = ({ setSidebarOpen, sidebarOpen }: { setSidebarOpen: Function, sidebarOpen: boolean }) => {
+    const { setTheme, theme } = useTheme();
     return (
         <div className=" w-full  ">
             <div className="flex justify-between items-center bg-white dark:bg-gray-800  px-4 py-2  border-gray-200 ">
@@ -25,6 +27,11 @@ export const DashboardHeader = ({ setSidebarOpen, sidebarOpen }: { setSidebarOpe
 
 
                 <div className="flex items-center">
+                    <div className="mx-4" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                        {
+                            theme === "light" ? <MoonIcon /> : <SunIcon />
+                        }
+                    </div>
                     <div className="flex items-center">
                         <div className="mr-2">
                             <ProfileSettings />
