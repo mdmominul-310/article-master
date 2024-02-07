@@ -27,7 +27,6 @@ export const register = async (values: z.infer<typeof AuthSchema.registerSchmea>
                 email: validatedValues.data.email,
                 password: hashedpassword,
                 name: validatedValues.data.name,
-                // username: validatedValues.data.username,
             }
         })
 
@@ -37,4 +36,12 @@ export const register = async (values: z.infer<typeof AuthSchema.registerSchmea>
         return error;
     }
 }
-// export default AuthActions;
+
+export const login = async (values: z.infer<typeof AuthSchema.loginSchema>) => {
+    try {
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+

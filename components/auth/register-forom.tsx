@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -16,7 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import AuthSchema from "@/schemas/auth-schemas"
-import { useState, useTransition } from "react"
+import { useTransition } from "react"
 import { register } from "@/actions/auth-actions"
 import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from "next/navigation"
@@ -29,14 +28,13 @@ export function RegisterForm() {
     const form = useForm<z.infer<typeof AuthSchema.registerSchmea>>({
         resolver: zodResolver(AuthSchema.registerSchmea),
         defaultValues: {
-            username: "",
             email: "",
             password: "",
             name: "",
         },
     })
     const router = useRouter()
-    // 2. Define a submit handler.
+
     function onSubmit(values: z.infer<typeof AuthSchema.registerSchmea>) {
         startTransition(() => {
             register(values).then((res) => {
